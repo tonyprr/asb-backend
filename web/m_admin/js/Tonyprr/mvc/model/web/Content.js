@@ -18,6 +18,7 @@ Ext.define("Tonyprr.mvc.model.web.Content",{
         "adicional1",
         "adicional2",
         "adicional3",
+        "adicional4",
         {name:"orden",type:"integer"},
         {name:"estado",type:"boolean"},
         {name:"fechainipub",type:"date",dateFormat:'Y-m-d H:i:s'},

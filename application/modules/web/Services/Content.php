@@ -85,6 +85,7 @@ class Content {
             if( isset($formData['adicional1']) ) $oContent->setAdicional1($formData['adicional1']);
             if( isset($formData['adicional2']) ) $oContent->setAdicional2($formData['adicional2']);
             if( isset($formData['adicional3']) ) $oContent->setAdicional3($formData['adicional3']);
+            if( isset($formData['adicional4']) ) $oContent->setAdicional4($formData['adicional4']);
             if( isset($formData['fechainipub']) )  $oContent->setFechainipub( new \DateTime($formData['fechainipub']) );
             if( isset($formData['fechafinpub']) )  $oContent->setFechafinpub( new \DateTime($formData['fechafinpub']) );
                 
@@ -140,7 +141,7 @@ class Content {
             }
             return $oContent;
         } catch(\Exception $e) {
-            throw new \Exception("Error al guardar registro. ", 1);//$e->getMessage()
+            throw new \Exception("Error al guardar registro. " . $e->getMessage(), 1);//$e->getMessage()
         }
     }
     

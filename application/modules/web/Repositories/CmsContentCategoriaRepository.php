@@ -18,14 +18,14 @@ class CmsContentCategoriaRepository extends EntityRepository
             $oLanguage = $this->_em->getRepository("\web\Entity\CmsLanguage")->findOneByidLanguage($oLanguage);
         
         if ($catePadre != NULL) {
-            $oProductoCategoria = $this->find($catePadre );
-            if(!($oProductoCategoria instanceof \web\Entity\CmsContentCategoria)) {
+            $oContentCategoria = $this->find($catePadre );
+            if(!($oContentCategoria instanceof \web\Entity\CmsContentCategoria)) {
                 throw new \Exception('No existe la categoria del producto.',1);
             }
         }
 
-        $qbProductoCategoria = $this->_em->createQueryBuilder();
-        $qbProductoCategoria->select(
+        $qbContentCategoria = $this->_em->createQueryBuilder();
+        $qbContentCategoria->select(
                     '
                     pc.idcontcate, pc.nivelCate, pc.imagenCate, pc.ordenCate, pc.estadoCate,
                     pcl.descripcion, pcl.detalle
@@ -33,17 +33,17 @@ class CmsContentCategoriaRepository extends EntityRepository
                     )->from($this->_entityName,'pc')->innerJoin('pc.languages','pcl')->where('pc.nivelCate > 0')
                     ->andWhere("pcl.language = :lang")->setParameter('lang', $oLanguage)
                    ->orderBy('pc.ordenCate','ASC');
-        if ($catePadre != NULL) $qbProductoCategoria->andWhere('pc.contcatePadre = :categoria')->setParameter('categoria', $oProductoCategoria);
-        if ($estado != "TODOS") $qbProductoCategoria->andWhere('pc.estadoCate = :estado')->setParameter('estado', $estado);
-        $qyProductoCategoria = $qbProductoCategoria->getQuery();
+        if ($catePadre != NULL) $qbContentCategoria->andWhere('pc.contcatePadre = :categoria')->setParameter('categoria', $oContentCategoria);
+        if ($estado != "TODOS") $qbContentCategoria->andWhere('pc.estadoCate = :estado')->setParameter('estado', $estado);
+        $qyContentCategoria = $qbContentCategoria->getQuery();
         
         if ($pageStart!= NULL and $pageLimit!=NULL) {
-            $count = Paginate::getTotalQueryResults($qyProductoCategoria);
-            $qyProductoCategoria->setFirstResult($pageStart)->setMaxResults($pageLimit);
+            $count = Paginate::getTotalQueryResults($qyContentCategoria);
+            $qyContentCategoria->setFirstResult($pageStart)->setMaxResults($pageLimit);
         }
-        $aProductoCategoria = $qyProductoCategoria->getResult();
+        $aContentCategoria = $qyContentCategoria->getResult();
         
-        return $aProductoCategoria;
+        return $aContentCategoria;
     }
     
     public function getTree($idcatpadre = 1, $language=1, $todos = false) {
@@ -65,18 +65,18 @@ class CmsContentCategoriaRepository extends EntityRepository
             if (!$todos) $qbProdCate->andWhere('ps.estadoCate = :estadoCate')->setParameter('estadoCate', 1);
 //            if ($oProdCategoriacontcatePadre == NULL) $qbProdCate->andWhere('ps.contcatePadre IS NULL');
 //            else $qbProdCate->andWhere('ps.contcatePadre = :ocontcatePadre')->setParameter('ocontcatePadre', $oProdCategoriacontcatePadre);
-            $qyProductoCategoria = $qbProdCate->getQuery();
-            $aProductoCategoria = $qyProductoCategoria->getResult();
+            $qyContentCategoria = $qbProdCate->getQuery();
+            $aContentCategoria = $qyContentCategoria->getResult();
             
-            $totalItems = count($aProductoCategoria);
+            $totalItems = count($aContentCategoria);
             $cont=1;
             if ($totalItems > 0 ) {
-                foreach ($aProductoCategoria as $oProdCategoria) {
+                foreach ($aContentCategoria as $oProdCategoria) {
                     if (!$oProdCategoria instanceof \web\Entity\CmsContentCategoria)
                         throw new \Exception("No existe categoria dentro del arbol.", 1);
                     
-//                    $oProdCategoria = new CmsProductoCategoria();
-//                    $dqlTotalHijos = "SELECT COUNT(ps.idcontcate) from CmsProductoCategoria ps 
+//                    $oProdCategoria = new CmsContentCategoria();
+//                    $dqlTotalHijos = "SELECT COUNT(ps.idcontcate) from CmsContentCategoria ps 
 //                                    WHERE ps.tipo = :tipo AND ps.contcatePadre = :contcatePadre AND ps.estadoCate=1 ORDER BY ps.ordenCate ASC";
 //                    if (!$todos) {$dqlTotalHijos .= ""; }
 //                    $qyTotalHijos = $this->_em->createQuery($dqlTotalHijos);
@@ -87,8 +87,8 @@ class CmsContentCategoriaRepository extends EntityRepository
                     $qbProdCate2->select('COUNT(ps.idcontcate)')->from('\web\Entity\CmsContentCategoria','ps')->andWhere('ps.nivelCate > 0');
                     if (!$todos) $qbProdCate2->andWhere('ps.estadoCate = :estadoCate')->setParameter('estadoCate', 1);
                     $qbProdCate2->andWhere('ps.contcatePadre = :padre')->setParameter('padre', $oProdCategoria);
-                    $qyProductoCategoria2 = $qbProdCate2->getQuery();
-                    $iTotalHijos = $qyProductoCategoria2->getSingleScalarResult();
+                    $qyContentCategoria2 = $qbProdCate2->getQuery();
+                    $iTotalHijos = $qyContentCategoria2->getSingleScalarResult();
                     
                     $idsToFilter = array($language);
                     

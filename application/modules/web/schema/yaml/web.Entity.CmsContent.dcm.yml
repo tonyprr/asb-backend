@@ -42,17 +42,17 @@ web\Entity\CmsContent:
             nullable: true
             column: __adicional1
         adicional2:
-            type: string
-            length: 100
-            fixed: false
+            type: text
             nullable: true
             column: __adicional2
         adicional3:
-            type: string
-            length: 100
-            fixed: false
+            type: text
             nullable: true
             column: __adicional3
+        adicional4:
+            type: text
+            nullable: true
+            column: __adicional4
         orden:
             type: integer
             unsigned: false

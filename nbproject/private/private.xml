@@ -4,10 +4,15 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/D:/wamp/www/asb-backend/application/modules/cart/Services/ProductoGaleria.php</file>
+            <file>file:/D:/wamp/www/asb-backend/web/m_admin/js/Tonyprr/mvc/controller/web/Contenido1.js</file>
             <file>file:/D:/wamp/www/asb-backend/application/modules/api/controllers/ProductoController.php</file>
+            <file>file:/D:/wamp/www/asb-backend/web/m_admin/js/Tonyprr/mvc/App.js</file>
+            <file>file:/D:/wamp/www/asb-backend/web/m_admin/js/Tonyprr/mvc/model/web/Content.js</file>
             <file>file:/D:/wamp/www/asb-backend/application/configs/application.ini</file>
             <file>file:/D:/wamp/www/asb-backend/application/Bootstrap.php</file>
             <file>file:/D:/wamp/www/asb-backend/web/index.php</file>
+            <file>file:/D:/wamp/www/asb-backend/web/m_admin/js/Tonyprr/mvc/view/web/Contenido1.js</file>
+            <file>file:/D:/wamp/www/asb-backend/web/m_admin/js/Tonyprr/mvc/view/web/WinContenido1.js</file>
         </group>
     </open-files>
 </project-private>

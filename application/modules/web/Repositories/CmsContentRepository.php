@@ -29,13 +29,13 @@ class CmsContentRepository extends EntityRepository
         $qbContent = $this->_em->createQueryBuilder();
         $qbContent->select(
                     '
-                    c.idcontent,c.imagen,c.imagen2,c.adjunto,c.orden,c.estado,c.fechainipub,c.url,c.adicional1,c.adicional2,c.adicional3,
+                    c.idcontent,c.imagen,c.imagen2,c.adjunto,c.orden,c.estado,c.fechainipub,c.url,c.adicional1,c.adicional2,c.adicional3,c.adicional4,
                     c.fechafinpub,c.fechamodf,c.fechareg,
                     cl.descripcion as nombre_content,cl.intro as intro_content,cl.detalle as detalle_content,
                     ca.idcontcate, cal.descripcion as nameCate
                     '
                     )->from($this->_entityName,'c')
-                   ->leftJoin('c.contcate','ca')->leftJoin('c.languages','cl')->innerJoin('ca.languages','cal')
+                   ->leftJoin('c.contcate','ca')->leftJoin('c.languages','cl')->leftJoin('ca.languages','cal')
                     ->where("cl.language = :lang and cal.language= :lang")->setParameter('lang', $oLanguage)
                    ->addOrderBy('c.fechainipub','DESC')->addOrderBy('c.orden','ASC');
         if ($idcontCate != NULL) $qbContent->andWhere('c.contcate = :categoria')->setParameter('categoria', $oContentCategoria);

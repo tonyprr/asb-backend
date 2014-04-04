@@ -97,9 +97,9 @@ Ext.define('Tonyprr.mvc.controller.web.Contenido1', {
 
             this.getWinContenido1().getComponent(0).getForm().reset();
             this.getWinContenido1().getComponent(0).getForm().setValues({idcontcate: idCategoria, nameCate:idDescCate});
-            
-            this.getWinContenido1().down(('form[itemId="formContenido1Language"]')).getForm().reset();
-            this.getWinContenido1().down(('grid[itemId="gridContenido1Language"]')).getStore().removeAll();
+//            
+//            this.getWinContenido1().down(('form[itemId="formContenido1Language"]')).getForm().reset();
+//            this.getWinContenido1().down(('grid[itemId="gridContenido1Language"]')).getStore().removeAll();
         } catch(Exception) {
             Tonyprr.core.Lib.exceptionAlert(Exception);
         }
@@ -122,9 +122,9 @@ Ext.define('Tonyprr.mvc.controller.web.Contenido1', {
                             formProd = controller.getWinContenido1().getComponent(0);
                             formProd.getForm().setValues({idcontent:json.idcontent});
                             
-                            storeLanguage = controller.getWinContenido1().down('grid[itemId="gridContenido1Language"]').getStore();
-                            Ext.apply(storeLanguage.getProxy().extraParams, {idcontent : json.idcontent});
-                            storeLanguage.load();
+//                            storeLanguage = controller.getWinContenido1().down('grid[itemId="gridContenido1Language"]').getStore();
+//                            Ext.apply(storeLanguage.getProxy().extraParams, {idcontent : json.idcontent});
+//                            storeLanguage.load();
                             
                         }
                         Tonyprr.App.showNotification({message:json.msg});

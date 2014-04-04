@@ -116,16 +116,20 @@ Ext.define("Tonyprr.mvc.view.web.Contenido1", {
 //                            meContenido1.down('grid[itemId="gridContenido1"]').toggleCollapse();
                             meContenido1.down('panel[itemId="winContenido1"]').getComponent(0).loadRecord(grid.getStore().getAt(rowIndex));
 //                            meContenido1.down('panel[itemId="winContenido1"]').getComponent(0).getForm().setValues({borrarAdj: 0});
-                            meContenido1.down('form[itemId="formContenido1Language"]').getForm().reset();
+//                            meContenido1.down('form[itemId="formContenido1Language"]').getForm().reset();
                             
-                            idReg = grid.getStore().getAt(rowIndex).get('idcontent');
-                            storeLanguage = grid.up('panel[itemId="viewUIContenido1"]').down('grid[itemId="gridContenido1Language"]').getStore();
-                            Ext.apply(storeLanguage.getProxy().extraParams, {idcontent: idReg});
-                            storeLanguage.load();
-                            
+//                            idReg = grid.getStore().getAt(rowIndex).get('idcontent');
+//                            storeLanguage = grid.up('panel[itemId="viewUIContenido1"]').down('grid[itemId="gridContenido1Language"]').getStore();
+//                            Ext.apply(storeLanguage.getProxy().extraParams, {idcontent: idReg});
+//                            storeLanguage.load();
+
                             storeGaleria = meContenido1.down('dataview[itemId="viewGaleWidget"]').getStore();
-                            Ext.apply( storeGaleria.getProxy().extraParams, {idcontent: idReg} );
+                            Ext.apply( storeGaleria.getProxy().extraParams, {idcontent: idReg, tipoGale: 1} );
                             storeGaleria.load();
+                            
+                            storeGaleria2 = meContenido1.down('dataview[itemId="viewGale2Widget"]').getStore();
+                            Ext.apply( storeGaleria2.getProxy().extraParams, {idcontent: idReg, tipoGale: 2} );
+                            storeGaleria2.load();
                         }
                     }
                     ,{

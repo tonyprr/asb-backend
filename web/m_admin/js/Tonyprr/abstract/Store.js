@@ -1,6 +1,8 @@
 Ext.define("Tonyprr.abstract.Store",{
     extend : 'Ext.data.Store',
     model  : "Tonyprr.abstract.Model",
+    autoLoad: false,
+    autoSync: true,
     pageSize: 15,
     method : 'POST',
     constructor	: function(options) {

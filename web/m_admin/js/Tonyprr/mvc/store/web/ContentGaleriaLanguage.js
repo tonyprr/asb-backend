@@ -1,6 +1,6 @@
 Ext.define("Tonyprr.mvc.store.web.ContentGaleriaLanguage",{
     extend  : 'Ext.data.Store',//Tonyprr.abstract.StoreRest
-    autoLoad: true,
+    autoLoad: false,
     autoSync: true,
     model  : "Tonyprr.mvc.model.web.ContentGaleriaLanguage",
     //url     : '/admin/web-content-galeria/list-language/',

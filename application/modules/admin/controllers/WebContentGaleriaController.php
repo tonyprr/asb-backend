@@ -22,8 +22,9 @@ class Admin_WebContentGaleriaController extends Zend_Controller_Action
             if ($this->getRequest()->getPost()) {
                 $data = $this->getRequest()->getParams();
                 $idContent = isset($data['idcontent'])?$data['idcontent']:0;
+                $tipoGale = isset($data['tipoGale'])?$data['tipoGale']:1;
                 $srvContentGaleria = new ContentGaleria();
-                list($aContentGaleria, $total) = $srvContentGaleria->aList($idContent, 1);
+                list($aContentGaleria, $total) = $srvContentGaleria->aList($idContent, 1, $tipoGale);
                 $objRecords = \Tonyprr_lib_Records::getInstance();
                 $objRecords->normalizeRecords($aContentGaleria);
                 $result['success'] = 1;

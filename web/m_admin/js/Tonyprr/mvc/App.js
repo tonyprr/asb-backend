@@ -159,123 +159,38 @@ Ext.define("Tonyprr.mvc.App",{
                     iconCls:'key_small'
             });
 
-//            me.treeMenu = Ext.create('Ext.tree.Panel', {
-//                title: 'Clientes',
-//                rootVisible: false,
-//                collapsed : true,
-//                root: 
-//                    {
-//                        text: 'root',
-//                        expanded: true,
-//                        children: [
-//                            {
-//                                text: 'Gestión de Usuarios',
-//                                expanded: true,
-//                                children: [
-//                                    {
-//                                        text: 'Clientes',
-//                                        leaf: true
-//                                    }
-//                                ]
-//                                
-//                            }
-//                        ]
-//                    },
-//                    listeners: {
-//                        itemclick: {
-//                            fn: function(view,record,item,index) {
-//                                switch (record.get('text')) {
-//                                    case 'Clientes' : me.agregarTab('Clientes', 'tabm_cliente', '', true,'Cliente', 'web');
-//                                    break;
-//                                }
-//                            }
-//                        }
-//                    }
-//            });
-            
-            me.treeMenuCarrito = Ext.create('Ext.tree.Panel', {
-                title: 'Gestión Carro de Compras',
+            me.treeMenu = Ext.create('Ext.tree.Panel', {
+                title: 'CMS',
                 rootVisible: false,
-                collapsed : false,
+                collapsed : true,
                 root: 
                     {
                         text: 'root',
                         expanded: true,
                         children: [
                             {
-                                text: 'Gestión de Clientes',
-                                expanded: true,
-                                children: [
-                                    {
-                                        text: 'Clientes',
-                                        leaf: true
-                                    }
-                                ]
-                                
+                                text: 'Proyectos',
+                                leaf: true
                             }
                             ,{
-                                text: 'Productos',
-                                expanded: true,
-                                children: [
-//                                    {
-//                                        text: 'Marcas de Productos',
-//                                        leaf: true
-//                                    }
-                                    {
-                                        text: 'Categorias de Productos',
-                                        leaf: true
-                                    }
-                                    ,{
-                                        text: 'Registro de Productos',
-                                        leaf: true
-                                    }
-//                                    ,{
-//                                        text: 'Comentarios',
-//                                        leaf: true
-//                                    }
-                                ]
-                                
+                                text: 'Servicios',
+                                leaf: true
                             }
-                            ,{
-                                text: 'Movimiento de Productos',
-                                expanded: true,
-                                children: [
-                                    {
-                                        text: 'Pedidos',
-                                        leaf: true
-                                    }
-                                    ,{
-                                        text: 'Movimiento de Stock',
-                                        leaf: true
-                                    }
-                                ]
-                                
-                            }
-                            
                         ]
-                    }
-                    ,listeners: {
+                    },
+                    listeners: {
                         itemclick: {
                             fn: function(view,record,item,index) {
                                 switch (record.get('text')) {
-                                    case 'Clientes' : me.agregarTab('Clientes', 'tabm_cliente', '', true,'Cliente', 'web');
+                                    case 'Proyectos' : me.agregarTab('Proyectos', 'tabm_proyectos', '', true,'Contenido1', 'web');
                                     break;
-//                                    case 'Marcas de Productos' : me.agregarTab('Marcas', 'tabm_marca', '', true, 'Marca', 'cart');
-//                                    break;
-                                    case 'Categorias de Productos' : me.agregarTab('Categoria de Productos', 'tabm_productoCategoria', '', true,'ProductoCategoria', 'cart');
-                                    break;
-                                    case 'Registro de Productos' : me.agregarTab('Productos', 'tabm_producto', '', true,'Producto', 'cart');
-                                    break;
-                                    case 'Pedidos': me.agregarTab('Pedidos', 'tabm_pedidos', '', true, 'Orden', 'cart');
-                                    break;
-                                    case 'Movimiento de Stock': me.agregarTab('Movimiento de Stock', 'tabm_movStock', '', true, 'MovimientoStock', 'cart');
+                                    case 'Servicios' : me.agregarTab('Servicios', 'tabm_servicios', '', true,'Contenido2', 'web');
                                     break;
                                 }
                             }
                         }
                     }
             });
-            
             
             me.Viewport = new Ext.container.Viewport({
                 layout: 'border',
@@ -304,8 +219,7 @@ Ext.define("Tonyprr.mvc.App",{
                             animate:true
                         },
                         items: [
-//                            me.treeMenu,
-                            me.treeMenuCarrito
+                            me.treeMenu
                         ]
                     },
                     me.tabsPrinAdmin

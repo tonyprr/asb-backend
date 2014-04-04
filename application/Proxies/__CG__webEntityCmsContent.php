@@ -285,10 +285,22 @@ class CmsContent extends \web\Entity\CmsContent implements \Doctrine\ORM\Proxy\P
         return parent::getTipo();
     }
 
+    public function setAdicional4($adicional4)
+    {
+        $this->__load();
+        return parent::setAdicional4($adicional4);
+    }
+
+    public function getAdicional4()
+    {
+        $this->__load();
+        return parent::getAdicional4();
+    }
+
 
     public function __sleep()
     {
-        return array('__isInitialized__', 'idcontent', 'imagen', 'imagen2', 'adjunto', 'url', 'adicional1', 'adicional2', 'adicional3', 'orden', 'estado', 'fechainipub', 'fechafinpub', 'fechamodf', 'fechareg', 'languages', 'galeria', 'comentarios', 'contcate', 'tipo');
+        return array('__isInitialized__', 'idcontent', 'imagen', 'imagen2', 'adjunto', 'url', 'adicional1', 'adicional2', 'adicional3', 'adicional4', 'orden', 'estado', 'fechainipub', 'fechafinpub', 'fechamodf', 'fechareg', 'languages', 'galeria', 'comentarios', 'contcate', 'tipo');
     }
 
     public function __clone()
