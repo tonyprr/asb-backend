@@ -59,14 +59,14 @@ class CmsContent
     /**
      * @var string $adicional2
      *
-     * @ORM\Column(name="__adicional2", type="string", length=100, nullable=true)
+     * @ORM\Column(name="__adicional2", type="text", nullable=true)
      */
     private $adicional2;
 
     /**
      * @var string $adicional3
      *
-     * @ORM\Column(name="__adicional3", type="string", length=100, nullable=true)
+     * @ORM\Column(name="__adicional3", type="text", nullable=true)
      */
     private $adicional3;
 
@@ -615,5 +615,35 @@ class CmsContent
     public function getTipo()
     {
         return $this->tipo;
+    }
+    /**
+     * @var string $adicional4
+     *
+     * @ORM\Column(name="__adicional4", type="text", nullable=true)
+     */
+    private $adicional4;
+
+
+    /**
+     * Set adicional4
+     *
+     * @param string $adicional4
+     * @return CmsContent
+     */
+    public function setAdicional4($adicional4)
+    {
+        $this->adicional4 = $adicional4;
+    
+        return $this;
+    }
+
+    /**
+     * Get adicional4
+     *
+     * @return string 
+     */
+    public function getAdicional4()
+    {
+        return $this->adicional4;
     }
 }

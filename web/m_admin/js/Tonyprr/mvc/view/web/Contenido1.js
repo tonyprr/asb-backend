@@ -118,7 +118,7 @@ Ext.define("Tonyprr.mvc.view.web.Contenido1", {
 //                            meContenido1.down('panel[itemId="winContenido1"]').getComponent(0).getForm().setValues({borrarAdj: 0});
 //                            meContenido1.down('form[itemId="formContenido1Language"]').getForm().reset();
                             
-//                            idReg = grid.getStore().getAt(rowIndex).get('idcontent');
+                            idReg = grid.getStore().getAt(rowIndex).get('idcontent');
 //                            storeLanguage = grid.up('panel[itemId="viewUIContenido1"]').down('grid[itemId="gridContenido1Language"]').getStore();
 //                            Ext.apply(storeLanguage.getProxy().extraParams, {idcontent: idReg});
 //                            storeLanguage.load();
@@ -160,7 +160,7 @@ Ext.define("Tonyprr.mvc.view.web.Contenido1", {
                     ]
                 },
                 {dataIndex: 'idcontent',header : 'ID',width:26, sortable : true},
-                {dataIndex: 'nombre_content',header : 'Descripción',width: 235,sortable : true},
+                {dataIndex: 'adicional1',header : 'Descripción',width: 235,sortable : true},
 //                {dataIndex: 'precio',header : 'Precio',width: 70,sortable : true},
 //                {dataIndex: 'cantidad',header : 'Stock',width: 70,sortable : true},
 //                {dataIndex: 'cantidadVendidos',header : 'Vendidos',width: 70,sortable : true},

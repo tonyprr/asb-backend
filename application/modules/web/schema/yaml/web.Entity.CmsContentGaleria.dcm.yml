@@ -16,6 +16,11 @@ web\Entity\CmsContentGaleria:
             unsigned: false
             nullable: false
             column: __orden_gale
+        tipoGale:
+            type: integer
+            unsigned: false
+            nullable: false
+            column: __tipo_gale
         imagenGale:
             type: string
             length: 100

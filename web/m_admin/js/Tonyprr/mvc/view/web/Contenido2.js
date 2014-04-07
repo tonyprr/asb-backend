@@ -14,7 +14,7 @@ Ext.define("Tonyprr.mvc.view.web.Contenido2", {
         {
             region : 'west',
             xtype: 'panel',
-            title: 'Lista de Mind Break',
+            title: 'Lista',
             itemId:'viewListContenido2',
             width : 310,
             border : true,
@@ -33,62 +33,8 @@ Ext.define("Tonyprr.mvc.view.web.Contenido2", {
     ],
     initComponent : function() {
         this.callParent(arguments);
-        meDestac = this;
+        meContenido2 = this;
         
-//        Ext.create('Tonyprr.mvc.store.web.ContentCategoriaTree', {storeId:'CateContenido2StoreTree'});
-        var storeCateContenido2 = Ext.create('Tonyprr.mvc.store.web.ContentCategoriaTree');
-        gridTreeDestac = Ext.create("Ext.tree.Panel", {
-            alias : 'widget.treeCateContenido2',
-//            id : 'idTreeCateContenido2',
-            itemId:'treeCateContenido2',
-            autoWidth: true,
-            height: 150,
-            autoScroll: true,
-            useArrows: true,
-            rootVisible: false,
-            store: storeCateContenido2,
-//            store: Ext.data.StoreManager.lookup('CateContenido2StoreTree'),//'Tonyprr.mvc.store.web.ContentCategoriaTree',
-            multiSelect: false,
-            singleExpand: false,
-            columns: [
-                {
-                    xtype: 'treecolumn',
-                    text: 'Categoria',
-                    flex: 1,
-                    dataIndex: 'nameCate'
-                },{
-                    text: 'ID',
-                    dataIndex: 'idcontcate',
-                    hidden: true
-                },{
-                    text: 'nivel',
-                    dataIndex: 'nivelCate',
-                    hidden: true
-                },{
-                    text: 'Estado',
-                    dataIndex: 'estadoCate',
-                    sorteable: false,
-                    align : 'center',
-                    width: 50,
-                    renderer: Tonyprr.core.Lib.checkRender
-                }
-            ]
-//            ,dockedItems : [{
-//                xtype: 'toolbar',
-//                dock: 'top',
-//                items: [
-//                    '-',
-//                    {
-//                        text:'Agregar Nuevo',
-//                        iconCls : 'add'
-//                    },'-'
-//                ]
-//            }]
-        });
-        
-        
-        
-//        Ext.create('Tonyprr.mvc.store.web.Content', {storeId:'Contenido2Store'});
         var storeContenido2 = Ext.create('Tonyprr.mvc.store.web.Content');
         panelView = Ext.create("Ext.grid.Panel", {
             frame:true,
@@ -103,7 +49,7 @@ Ext.define("Tonyprr.mvc.view.web.Contenido2", {
                 items: [
                     '-',
                     {
-                        text:'Agregar Mind Break',
+                        text:'Agregar Servicio',
                         iconCls: 'add'
                     },'-'
                 ]
@@ -116,21 +62,11 @@ Ext.define("Tonyprr.mvc.view.web.Contenido2", {
                         icon: Tonyprr.Constants.IMAGE_EDIT,
                         tooltip: 'Editar el Registro',
                         handler: function(grid, rowIndex, colIndex) {
-//                            meDestac.getComponent('viewRegContenido2').expand(true);
-//                            meDestac.down('grid[itemId="gridContenido2"]').toggleCollapse();
-                            meDestac.down('panel[itemId="winContenido2s"]').getComponent(0).loadRecord(grid.getStore().getAt(rowIndex));
-                            meDestac.down('panel[itemId="winContenido2s"]').getComponent(0).getForm().setValues({borrarAdj: 0});
-                            meDestac.down('form[itemId="formContenido2Language"]').getForm().reset();
+                            meContenido2.down('panel[itemId="winContenido2"]').getComponent(0).loadRecord(grid.getStore().getAt(rowIndex));
                             
-                            idReg = grid.getStore().getAt(rowIndex).get('idcontent');
-                            storeLanguage = grid.up('panel[itemId="viewUIContenido2"]').down('grid[itemId="gridContenido2Language"]').getStore();
-                            Ext.apply(storeLanguage.getProxy().extraParams, {idcontent: idReg});
-                            storeLanguage.load();
-//                            storeGaleria = meDestac.down('dataview[itemId="viewGaleWidget"]').getStore();
-//                            Ext.apply( storeGaleria.getProxy().extraParams, {idcontent: idReg} );
-//                            storeGaleria.load();
                         }
-                    },{
+                    }
+                    ,{
                         icon: Tonyprr.Constants.IMAGE_CROSS,
                         tooltip: 'Eliminar el Registro',
                         handler: function(grid, rowIndex, colIndex) {
@@ -154,12 +90,18 @@ Ext.define("Tonyprr.mvc.view.web.Contenido2", {
                                         });
                                 });
                         }                
-                    }]
+                    }
+                    ]
                 },
                 {dataIndex: 'idcontent',header : 'ID',width:26, sortable : true},
-                {dataIndex: 'nombre_content',header : 'Título',width: 220,sortable : true},
+                {dataIndex: 'adicional1',header : 'Descripción',width: 235,sortable : true},
+//                {dataIndex: 'precio',header : 'Precio',width: 70,sortable : true},
+//                {dataIndex: 'cantidad',header : 'Stock',width: 70,sortable : true},
+//                {dataIndex: 'cantidadVendidos',header : 'Vendidos',width: 70,sortable : true},
                 {dataIndex: 'orden',header : 'Orden',width: 60,hidden : true},
                 {dataIndex: 'estado',header : 'Estado',width: 50,sortable : true,renderer: Tonyprr.core.Lib.checkRender}
+//                {dataIndex: 'fecharegConte',header : 'Fecha Ini.',width: 70,sortable : false,
+//                    xtype: 'datecolumn',format:'d-m-Y'}
             ],
             plugins : [
                 {
@@ -181,21 +123,12 @@ Ext.define("Tonyprr.mvc.view.web.Contenido2", {
             })
         });
         
-        panelForm = Ext.create('Tonyprr.mvc.view.web.Contenido2Win');
-        meDestac.getComponent('viewListContenido2').add(gridTreeDestac);
-        meDestac.getComponent('viewListContenido2').add(panelView);
-        meDestac.getComponent('viewRegContenido2').add(panelForm);
+        panelForm = Ext.create('Tonyprr.mvc.view.web.WinContenido2');
+        meContenido2.getComponent('viewListContenido2').add(panelView);
+        meContenido2.getComponent('viewRegContenido2').add(panelForm);
 
         delete panelView;
-        delete gridTreeDestac;
         delete panelForm;
         
     }
-//    ,listeners : {
-//        beforedestroy: function(panel, opts) {
-//            alert("borrar...");
-//            panel.getComponent(0).destroy();
-//            panel.getComponent(1).destroy();
-//        }
-//    }
 });

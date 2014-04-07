@@ -27,8 +27,8 @@ class ContentGaleria {
      * 
      * @return array
      */
-    public function aList($idcontCate=NULL, $oLanguage=1, $pageStart=NULL, $pageLimit=NULL) {
-        $aResult = $this->_em->getRepository($this->_entityName)->listRecords($idcontCate, $oLanguage, $pageStart, $pageLimit);
+    public function aList($idcontCate=NULL, $oLanguage=1, $tipoGale, $pageStart=NULL, $pageLimit=NULL) {
+        $aResult = $this->_em->getRepository($this->_entityName)->listRecords($idcontCate, $oLanguage, $tipoGale, $pageStart, $pageLimit);
         return $aResult;
     }
     
@@ -51,7 +51,7 @@ class ContentGaleria {
                     $oContentGaleriaLanguage = new CmsContentGaleriaLanguage();
                     $oContentGaleriaLanguage ->setContgale($oContentGale)
                                     -> setLanguage($oLanguage)
-                                    ->setTitulo("http://vadimarperu.com/web");
+                                    ->setTitulo("titulo");
                     $oContentGale->addLanguage($oContentGaleriaLanguage);
                 }
             }
@@ -60,20 +60,21 @@ class ContentGaleria {
 //            $oContentGale->setDescripcionGale($formData['descripcionGale']);
             $oContentGale->setContent($Content);
             $oContentGale->setOrdenGale($formData['ordenGale']);
+            $oContentGale->setTipoGale($formData['tipoGale']);
             $this->_em->persist($oContentGale);
             $this->_em->flush();
 
 
             /* Subir archivo de foto  */
             $tipo = $_FILES['file_foto_gale']['type'];
-            if ($tipo == "image/jpg" || $tipo =="image/jpeg" || $tipo =="image/pjpeg" || $tipo =="image/png") {
+            if ($tipo == "image/jpg" || $tipo =="image/jpeg" || $tipo =="image/pjpeg") {// || $tipo =="image/png"
                 $aInfoImg = pathinfo($_FILES['file_foto_gale']['name']);
                 $nomArchivoImg = trim("content_ga_" . time() . '_' . $Content->getIdcontent(). '_'. $oContentGale->getIdcontgale()) .'.' . $aInfoImg['extension'];
                 @move_uploaded_file($_FILES['file_foto_gale']['tmp_name'], $this->_pathContentGale . $nomArchivoImg);
-//                $objThumb = new \Tonyprr_Thumb();
-//                $res2=$objThumb->thumbjpeg($this->_pathContentGale . $nomArchivoImg,"",72,'thumb_');
+                $objThumb = new \Tonyprr_Thumb();
+                $res2=$objThumb->thumbjpeg($this->_pathContentGale . $nomArchivoImg, "",100,'thumb_');
                 @unlink($this->_pathContentGale . trim($oContentGale->getImagenGale()));
-//                @unlink($this->_pathContentGale . 'thumb_' . trim($oContentGale->getImagenGale()));
+                @unlink($this->_pathContentGale . 'thumb_' . trim($oContentGale->getImagenGale()));
                 
                 $oContentGale->setImagenGale($nomArchivoImg);
                 $subioArchivo = true;

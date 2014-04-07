@@ -2,16 +2,18 @@ Ext.define('Tonyprr.mvc.controller.web.Contenido2', {
     extend	: 'Ext.app.Controller',
     stores	: [
                     'Tonyprr.abstract.Store','Tonyprr.mvc.store.web.Content','Tonyprr.mvc.store.web.ContentLanguage'
-                    ,'Tonyprr.mvc.store.web.ContentCategoriaTree'
+                    ,'Tonyprr.mvc.store.web.ContentCategoriaTree','Tonyprr.mvc.store.web.ContentGaleriaLanguage',
+                    'Tonyprr.mvc.store.web.ContentGaleria'
                   ],
     models	: [
                     'Tonyprr.abstract.Model','Tonyprr.mvc.model.web.Content','Tonyprr.mvc.model.web.ContentLanguage'
-                    ,'Tonyprr.mvc.model.web.ContentCategoria'
+                    ,'Tonyprr.mvc.model.web.ContentCategoria','Tonyprr.mvc.model.web.ContentGaleriaLanguage'
+                    ,'Tonyprr.mvc.model.web.ContentGaleria'
                   ],
 
     views	: [
                     'Tonyprr.mvc.view.web.Contenido2'
-                    ,'Tonyprr.mvc.view.web.Contenido2Win'
+                    ,'Tonyprr.mvc.view.web.WinContenido2'
 //                    ,'Tonyprr.mvc.view.web.ContentCategoriaTree'
                   ],
     refs: [
@@ -29,16 +31,8 @@ Ext.define('Tonyprr.mvc.controller.web.Contenido2', {
         }
         ,{
             ref: 'winContenido2',
-            selector: 'panel[itemId="winContenido2s"]'
+            selector: 'panel[itemId="winContenido2"]'
         }
-//        ,{
-//            ref: 'cbotipoprod',
-//            selector: 'combobox[itemId="cboTipoDestacWinDestac"]'
-//        }
-//        ,{
-//            ref : 'viewgaleria',
-//            selector : 'dataview[itemId="viewGaleWidget"]'
-//        }
     ],
     init	: function(app) {
         this.callParent(null);
@@ -46,7 +40,7 @@ Ext.define('Tonyprr.mvc.controller.web.Contenido2', {
             'grid[itemId="gridContenido2"]': {
                 afterrender : this.onGridAfterRender
             }
-            ,'grid[itemId="gridContenido2"] button[text="Agregar Mind Break"]': {
+            ,'grid[itemId="gridContenido2"] button[text="Agregar Servicio"]': {
                 click : this.onClickAdd
             }
 
@@ -55,13 +49,13 @@ Ext.define('Tonyprr.mvc.controller.web.Contenido2', {
                 afterrender : this.onTreeAfterRender
             }
 
-            ,'panel[itemId="winContenido2s"]': {
+            ,'panel[itemId="winContenido2"]': {
                 afterrender : this.onWinAfterRender
             }
-            ,'panel[itemId="winContenido2s"] button[text="Guardar"]': {
+            ,'panel[itemId="winContenido2"] button[text="Guardar"]': {
                 click : this.onClickSave
             }
-            ,'panel[itemId="winContenido2s"] button[text="guardar idioma"]': {
+            ,'panel[itemId="winContenido2"] button[text="guardar idioma"]': {
                 click : this.onClickSaveLanguage
             }
         });
@@ -74,44 +68,30 @@ Ext.define('Tonyprr.mvc.controller.web.Contenido2', {
     }
     
     ,onTreeAfterRender: function(grid, opts) {
-//        storeTree = Ext.getCmp('idTreeCateContenido2').getStore();
-        var treep = Ext.ComponentQuery.query('treepanel[itemId="treeCateContenido2"]')[0];
-//        storeTree = treep.getStore();
-//        storeTree = this.getTreeCateContenido2().getStore();
-        Ext.apply(treep.getStore().getProxy().extraParams, {padre : 3});
-        treep.getStore().load();
-//        this.loadTreeStore(treep.getStore());
+//        storeTree = this.getListContenido2().getComponent(0).getStore();
+//        Ext.apply(storeTree.getProxy().extraParams, {padre : 5});
+//        storeTree.load();
     }
     ,onGridAfterRender: function(grid, opts) {
-//        if( Ext.isObject(this.getCbotipoprod()) ) this.getCbotipoprod().getStore().load();
+        storeContenido2 = this.getListContenido2().getComponent(0).getStore();
+        Ext.apply(storeContenido2.getProxy().extraParams, {idcontcate : 12});
+        storeContenido2.load();
     }
     ,onWinAfterRender: function(panel, opts) {
 //        this.getCbomarcaprod().getStore().load();
     }
 
     ,onSelectCategoria: function(tree, model, index) {
-        idReg = model.get('idcontcate');
-//        storeDestacs = this.getListContenido2().getComponent(1).getStore();
-        var gridp = Ext.ComponentQuery.query('grid[itemId="gridContenido2"]')[0];
-//        Ext.apply(storeDestacs.getProxy().extraParams, {idcontcate : idReg});
-        Ext.apply(gridp.getStore().getProxy().extraParams, {idcontcate : idReg});
-        gridp.getStore().load();
     }
 
     ,onClickAdd: function(button,e) {
         try {
-            select = this.getListContenido2().getComponent(0).getSelectionModel().getSelection();
-            if (select == "") {
-                return;
-            }
-            idCategoria = select[0].get('idcontcate');
-            idDescCate = select[0].get('nameCate');
+            idCategoria = 12;
+            idDescCate = "Servicios";
 
             this.getWinContenido2().getComponent(0).getForm().reset();
             this.getWinContenido2().getComponent(0).getForm().setValues({idcontcate: idCategoria, nameCate:idDescCate});
             
-            this.getWinContenido2().down(('form[itemId="formContenido2Language"]')).getForm().reset();
-            this.getWinContenido2().down(('grid[itemId="gridContenido2Language"]')).getStore().removeAll();
         } catch(Exception) {
             Tonyprr.core.Lib.exceptionAlert(Exception);
         }
@@ -119,8 +99,9 @@ Ext.define('Tonyprr.mvc.controller.web.Contenido2', {
     
     ,onClickSave: function(button,e) {
         controller = this;
-        if(this.getWinContenido2().getComponent(0).getForm().isValid()) {
-            this.getWinContenido2().getComponent(0).getForm().submit({
+        formulario = this.getWinContenido2().getComponent(0).getForm();
+        if(formulario.isValid()) {
+            formulario.submit({
                 url : Tonyprr.BASE_URL + '/admin/web-content/save',
                 waitMsg:'Guardando, espere por favor...',
                 method:'POST',
@@ -130,14 +111,8 @@ Ext.define('Tonyprr.mvc.controller.web.Contenido2', {
                     try {
                         var json = Ext.JSON.decode(action.response.responseText);
                         if(json.success == 1) {
-                            controller.getListContenido2().getComponent(1).getStore().load();
-                            formDestac = controller.getWinContenido2().getComponent(0);
-                            formDestac.getForm().setValues({idcontent:json.idcontent});
-                            
-                            storeLanguage = controller.getWinContenido2().down('grid[itemId="gridContenido2Language"]').getStore();
-                            Ext.apply(storeLanguage.getProxy().extraParams, {idcontent : json.idcontent});
-                            storeLanguage.load();
-                            
+                            controller.getListContenido2().getComponent(0).getStore().load();
+                            formulario.setValues({idcontent:json.idcontent});
                         }
                         Tonyprr.App.showNotification({message:json.msg});
                     } catch(Exception) {
@@ -167,7 +142,7 @@ Ext.define('Tonyprr.mvc.controller.web.Contenido2', {
                 success: function(form, action) {
                     Tonyprr.App.showNotification({message:action.result.msg});
                     controller.getWinContenido2().down('grid[itemId="gridContenido2Language"]').getStore().load();
-                    controller.getListContenido2().getComponent(1).getStore().load();
+                    controller.getListContenido2().getComponent(0).getStore().load();
                 }
                 ,failure: function(form, action) {
                     Ext.Msg.alert('Fallido', action.result.msg);

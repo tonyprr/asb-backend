@@ -14,22 +14,24 @@ use Vendors\Paginate\Paginate;
 class CmsContentGaleriaRepository extends EntityRepository
 {
     
-    public function listRecords($idContent, $oLanguage=1, $pageStart=NULL, $pageLimit=NULL) {
+    public function listRecords($idContent, $oLanguage=1, $tipoGale, $pageStart=NULL, $pageLimit=NULL) {
         $count= 0;
         $oLanguage = $this->_em->getRepository("\web\Entity\CmsLanguage")->findOneByidLanguage($oLanguage);
         
         $oContent = $this->_em->find("\web\Entity\CmsContent", $idContent );
         if(!$oContent)
-            throw new \Exception('No existe el registro.');
+            throw new \Exception('No existe el registrooooooo.');
 
-        $dqlList = 'SELECT pg.idcontgale, pg.ordenGale, pg.imagenGale,pg.fecharegGale,
+        $dqlList = 'SELECT pg.idcontgale, pg.ordenGale, pg.imagenGale,pg.fecharegGale,pg.tipoGale,
                            pgl.titulo, pgl.descripcion,
                            p.idcontent
                     from \web\Entity\CmsContentGaleria pg 
                     INNER JOIN pg.content p INNER JOIN pg.languages pgl 
-                    WHERE pg.content = ?1 AND pgl.language =?2 ORDER BY pg.ordenGale ASC';
+                    WHERE pg.content = ?1 AND pgl.language =?2 AND pg.tipoGale = ?3 
+                    ORDER BY pg.ordenGale ASC';
         $qyContentCategoria = $this->_em->createQuery($dqlList);
-        $qyContentCategoria->setParameter(1,$oContent)->setParameter(2,$oLanguage);
+        $qyContentCategoria->setParameter(1,$oContent)->setParameter(2,$oLanguage)
+                ->setParameter(3, $tipoGale);
         
         if ($pageStart!= NULL and $pageLimit!=NULL) {
             $count = Paginate::getTotalQueryResults($qyContentCategoria);

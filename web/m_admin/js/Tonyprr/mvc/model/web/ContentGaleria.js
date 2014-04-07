@@ -5,6 +5,7 @@ Ext.define("Tonyprr.mvc.model.web.ContentGaleria",{
         {name:"idcontent",type:"integer"},
         {name: "ordenGale", type: 'integer'},
         "imagenGale",
+        {name: "tipoGale", type: 'integer'},
         {name:"fecharegGale",type:"date",dateFormat:'Y-m-d H:i:s'}
     ]
 });

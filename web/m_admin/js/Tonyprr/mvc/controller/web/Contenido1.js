@@ -97,9 +97,11 @@ Ext.define('Tonyprr.mvc.controller.web.Contenido1', {
 
             this.getWinContenido1().getComponent(0).getForm().reset();
             this.getWinContenido1().getComponent(0).getForm().setValues({idcontcate: idCategoria, nameCate:idDescCate});
-//            
-//            this.getWinContenido1().down(('form[itemId="formContenido1Language"]')).getForm().reset();
-//            this.getWinContenido1().down(('grid[itemId="gridContenido1Language"]')).getStore().removeAll();
+            
+            this.getWinContenido1().down(('dataview[itemId="viewGaleWidget"]')).getStore().removeAll();
+
+            this.getWinContenido1().down(('dataview[itemId="viewGale2Widget"]')).getStore().removeAll();
+
         } catch(Exception) {
             Tonyprr.core.Lib.exceptionAlert(Exception);
         }
@@ -107,8 +109,9 @@ Ext.define('Tonyprr.mvc.controller.web.Contenido1', {
     
     ,onClickSave: function(button,e) {
         controller = this;
-        if(this.getWinContenido1().getComponent(0).getForm().isValid()) {
-            this.getWinContenido1().getComponent(0).getForm().submit({
+        formulario = this.getWinContenido1().getComponent(0).getForm();
+        if(formulario.isValid()) {
+            formulario.submit({
                 url : Tonyprr.BASE_URL + '/admin/web-content/save',
                 waitMsg:'Guardando, espere por favor...',
                 method:'POST',
@@ -119,13 +122,13 @@ Ext.define('Tonyprr.mvc.controller.web.Contenido1', {
                         var json = Ext.JSON.decode(action.response.responseText);
                         if(json.success == 1) {
                             controller.getListContenido1().getComponent(1).getStore().load();
-                            formProd = controller.getWinContenido1().getComponent(0);
-                            formProd.getForm().setValues({idcontent:json.idcontent});
+                            //formProd = controller.getWinContenido1().getComponent(0);
+                            formulario.setValues({idcontent:json.idcontent});
                             
-//                            storeLanguage = controller.getWinContenido1().down('grid[itemId="gridContenido1Language"]').getStore();
-//                            Ext.apply(storeLanguage.getProxy().extraParams, {idcontent : json.idcontent});
-//                            storeLanguage.load();
-                            
+/*                            storeLanguage = controller.getWinContenido1().down('grid[itemId="gridContenido1Language"]').getStore();
+                            Ext.apply(storeLanguage.getProxy().extraParams, {idcontent : json.idcontent});
+                            storeLanguage.load();
+*/                            
                         }
                         Tonyprr.App.showNotification({message:json.msg});
                     } catch(Exception) {

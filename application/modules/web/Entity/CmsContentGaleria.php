@@ -201,4 +201,34 @@ class CmsContentGaleria
     {
         return $this->content;
     }
+    /**
+     * @var integer $tipoGale
+     *
+     * @ORM\Column(name="__tipo_gale", type="integer", nullable=false)
+     */
+    private $tipoGale;
+
+
+    /**
+     * Set tipoGale
+     *
+     * @param integer $tipoGale
+     * @return CmsContentGaleria
+     */
+    public function setTipoGale($tipoGale)
+    {
+        $this->tipoGale = $tipoGale;
+    
+        return $this;
+    }
+
+    /**
+     * Get tipoGale
+     *
+     * @return integer 
+     */
+    public function getTipoGale()
+    {
+        return $this->tipoGale;
+    }
 }
