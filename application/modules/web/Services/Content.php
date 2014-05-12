@@ -30,8 +30,18 @@ class Content {
      * @return array
      */
     public function aList($idcontCate=NULL, $oLanguage=1, $estado="TODOS", $pageStart=NULL, $pageLimit=NULL, $textoBusqueda=NULL) {
-        
-        $aResult = $this->_em->getRepository($this->_entityName)->listRecords($idcontCate, $oLanguage, $estado, $pageStart, $pageLimit, $textoBusqueda);
+        $toArray = true;
+        $aResult = $this->_em->getRepository($this->_entityName)->listRecords($toArray, $idcontCate, $oLanguage, $estado, $pageStart, $pageLimit, $textoBusqueda);
+        return $aResult;
+    }
+    
+    /**
+     * 
+     * @return array
+     */
+    public function aListXTipo($idtipo=NULL, $oLanguage=1, $estado="TODOS", $pageStart=NULL, $pageLimit=NULL, $textoBusqueda=NULL) {
+        $toArray = true;
+        $aResult = $this->_em->getRepository($this->_entityName)->listRecordsXTipo($toArray, $idtipo, $oLanguage, $estado, $pageStart, $pageLimit, $textoBusqueda);
         return $aResult;
     }
     

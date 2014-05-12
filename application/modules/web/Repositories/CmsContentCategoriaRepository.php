@@ -3,6 +3,7 @@
 namespace web\Repositories;
 
 use Doctrine\ORM\EntityRepository;
+use Tonyprr\Exception\ValidacionException;
 
 /**
  * CmsContentCategoriaRepository
@@ -12,7 +13,7 @@ use Doctrine\ORM\EntityRepository;
  */
 class CmsContentCategoriaRepository extends EntityRepository
 {
-    public function listRecords($catePadre, $oLanguage, $estado="TODOS", $pageStart=NULL, $pageLimit=NULL) {
+    public function listRecords($toArray, $catePadre, $oLanguage, $estado="TODOS", $pageStart=NULL, $pageLimit=NULL) {
         $count= 0;
         if(!$oLanguage instanceof \web\Entity\CmsLanguage)
             $oLanguage = $this->_em->getRepository("\web\Entity\CmsLanguage")->findOneByidLanguage($oLanguage);
@@ -41,9 +42,20 @@ class CmsContentCategoriaRepository extends EntityRepository
             $count = Paginate::getTotalQueryResults($qyContentCategoria);
             $qyContentCategoria->setFirstResult($pageStart)->setMaxResults($pageLimit);
         }
-        $aContentCategoria = $qyContentCategoria->getResult();
         
-        return $aContentCategoria;
+        if ($toArray) {
+            $aContentCategoria = $qyContentCategoria->getArrayResult();
+            $objRecords = \Tonyprr_lib_Records::getInstance();
+            $objRecords->normalizeRecord($aContentCategoria);
+        } else {
+            $aContentCategoria = $qyContentCategoria->getResult();
+        }
+        
+        if ($pageStart == NULL and $pageLimit == NULL) {
+            $count = count($aContentCategoria);
+        }
+        
+        return array($aContentCategoria, $count);
     }
     
     public function getTree($idcatpadre = 1, $language=1, $todos = false) {
@@ -112,5 +124,71 @@ class CmsContentCategoriaRepository extends EntityRepository
             throw new \Exception("Error al generar Menu.".$e->getMessage());
         }
     }
+    
+    /**
+     *
+     * @param int $id
+     * @param boolean $asArray
+     * @param boolean $soloActivo
+     * @return \web\Entity\CmsContent $oContentCategoria
+     */
+    public function getById($id, $language=null, $asArray=true, $soloActivo=false) {
+        $oContentCategoriaLang = null;
+        $resultado = null;
+        try {
+            if(!$language instanceof \web\Entity\CmsLanguage)
+                $language = $this->_em->getRepository("\web\Entity\CmsLanguage")->findOneByidLanguage($language);
+        
+            if ($asArray) {
+                $qbContentCategoria = $this->_em->createQueryBuilder();
+                $qbContentCategoria->select(
+                            '
+                            pc.idcontcate, pc.nivelCate, pc.imagenCate, pc.ordenCate, pc.estadoCate,
+                            pcp.idcontcate as idcontcatePadre, pcl.descripcion as nameCate
+                            '
+                            )->from($this->_entityName, 'pc')->distinct()//, pcpl.descripcion as nombre_padre
+                            ->innerJoin('pc.contcatePadre','pcp')
+                            ->innerJoin('pc.languages','pcl')
+                            ->andWhere("pcl.language = :lang")->setParameter('lang', $language)
+                            ->andWhere("pc.idcontcate = :id")->setParameter('id', $id);
+                if ($soloActivo) 
+                    $qbContentCategoria->andWhere('pc.estadoCate = :estado')->setParameter('estado', 1);
+                
+                $qyContentCategoria = $qbContentCategoria->getQuery();
+                $oContentCategoria = $qyContentCategoria->getArrayResult();
+                $objRecords = \Tonyprr_lib_Records::getInstance();
+                if (count($oContentCategoria) != 1)
+                    throw new ValidacionException('No existe este registro o no se encuentra disponible.');
+                $objRecords->normalizeRecord($oContentCategoria[0]);
+                $oContentCategoria = $oContentCategoria[0];
+                $resultado = $oContentCategoria;
+            } else {
+                $dqlList = 'SELECT pc FROM \web\Entity\CmsContentCategoria pc WHERE pc.idcontcate = ?1';
+                $qyContent = $this->_em->createQuery($dqlList);
+                $qyContent->setParameter(1,$id);
+                if($soloActivo) {
+                    $dqlList .= ' AND  pc.estadoCate = 1';
+                }
+                try {
+                    $oContentCategoria = $qyContent->getSingleResult();
+                    $idsToFilter = array($language);
+                    $oContentCategoriaLang = $oContentCategoria->getLanguages()->filter(
+                            function($oContentCategoriaLang) use ($idsToFilter) {
+                                return in_array($oContentCategoriaLang->getLanguage(), $idsToFilter);
+                            })->first();
+                    $resultado = array($oContentCategoria, $oContentCategoriaLang);
+                } catch(\Doctrine\ORM\NoResultException $e) {
+                    throw new ValidacionException('No existe este registro o no se encuentra disponible.');
+                }
+            }
+            return $resultado;
+        } catch(ValidacionException $e) {
+            throw new ValidacionException($e->getMessage(), $e->getCode());
+        } catch(\Exception $e) {
+            throw new \Exception('Ocurrió un error en el procesamiento, estaremos solucionandolo en breve. ' . $e->getMessage());
+        }
+        
+    }
+    
     
 }
