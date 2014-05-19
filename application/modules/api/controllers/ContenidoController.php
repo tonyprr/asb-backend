@@ -1,5 +1,6 @@
 <?php
 use web\Services\Content;
+use web\Services\ContentGaleria;
 use Tonyprr\Exception\ValidacionException;
 
 class Api_ContenidoController extends Zend_Controller_Action
@@ -34,6 +35,7 @@ class Api_ContenidoController extends Zend_Controller_Action
             $pageLimit = isset($data['limit'])?$data['limit']:NULL;
             $idcontCate = isset($data['idcontcate'])?$data['idcontcate']:NULL;
             $idtipo = isset($data['idtipo'])?$data['idtipo']:NULL;
+            $idContent = isset($data['idcont'])?$data['idcont']:NULL;
             $srvContenido = new Content();
 
             if ($data['operacion'] == "lista") {
@@ -43,10 +45,17 @@ class Api_ContenidoController extends Zend_Controller_Action
                     list($aContenidos, $total) = $srvContenido->aList($idcontCate, 1 ,1, $pageStart, $pageLimit);
                 $result['data'] = $aContenidos;
             } else if ($data['operacion'] == "getById") {
-                $aContenido = $srvContenido->getById($idcontCate, 1, true, true);
+                list($aContenido, $aContenidoLang) = $srvContenido->getById($idContent, 1, true, true);
+                $result['data'] = $aContenido;
+                $total = 1;
+            } else if ($data['operacion'] == "getGaleriaById") {
+                $srvContenidoGaleria = new ContentGaleria();
+                list($aContenido, $aContenidoLang) = $srvContenidoGaleria->aList($idContent, 1, $idtipo);
                 $result['data'] = $aContenido;
                 $total = 1;
             }
+            
+            
             
             $result['success'] = 1;
             $result['total'] = $total;
