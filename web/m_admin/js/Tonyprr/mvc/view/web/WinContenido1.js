@@ -76,6 +76,12 @@ Ext.define('Tonyprr.mvc.view.web.WinContenido1', {
                                         ]
                                     },            
                                     {
+                                        fieldLabel:'Distrito',
+                                        anchor : '90%',
+                                        name:'url',
+                                        allowBlank:false 
+                                    },
+                                    {
                                         xtype : 'numberfield',
                                         name:'orden',
                                         minValue : 0,
