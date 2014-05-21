@@ -88,6 +88,10 @@ Ext.define('Tonyprr.mvc.view.web.WinContenido2', {
                                         name:'idcontcate'
                                     },
                                     {
+                                        xtype: 'hidden',
+                                        name:'idTipo'
+                                    },
+                                    {
                                         fieldLabel:'Categoria',
                                         anchor : '90%',
                                         name:'nameCate',

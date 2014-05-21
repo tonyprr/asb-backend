@@ -90,13 +90,14 @@ Ext.define('Tonyprr.mvc.controller.web.Contenido1', {
         try {
             select = this.getListContenido1().getComponent(0).getSelectionModel().getSelection();
             if (select == "") {
+                Tonyprr.core.Lib.exceptionAlert("Seleccione una categoria antes de crear un nuevo proyecto.");
                 return;
             }
             idCategoria = select[0].get('idcontcate');
             idDescCate = select[0].get('nameCate');
 
             this.getWinContenido1().getComponent(0).getForm().reset();
-            this.getWinContenido1().getComponent(0).getForm().setValues({idcontcate: idCategoria, nameCate:idDescCate});
+            this.getWinContenido1().getComponent(0).getForm().setValues({idcontcate: idCategoria, nameCate:idDescCate, idTipo: 2});
             
             this.getWinContenido1().down(('dataview[itemId="viewGaleWidget"]')).getStore().removeAll();
 

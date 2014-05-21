@@ -90,7 +90,7 @@ Ext.define('Tonyprr.mvc.controller.web.Contenido2', {
             idDescCate = "Servicios";
 
             this.getWinContenido2().getComponent(0).getForm().reset();
-            this.getWinContenido2().getComponent(0).getForm().setValues({idcontcate: idCategoria, nameCate:idDescCate});
+            this.getWinContenido2().getComponent(0).getForm().setValues({idcontcate: idCategoria, nameCate:idDescCate, idTipo: 3});
             
         } catch(Exception) {
             Tonyprr.core.Lib.exceptionAlert(Exception);
