@@ -53,6 +53,24 @@ web\Entity\CmsContent:
             type: text
             nullable: true
             column: __adicional4
+        adicional5:
+            type: string
+            length: 130
+            fixed: false
+            nullable: true
+            column: __adicional5
+        adicional6:
+            type: string
+            length: 130
+            fixed: false
+            nullable: true
+            column: __adicional6
+        adicional7:
+            type: string
+            length: 130
+            fixed: false
+            nullable: true
+            column: __adicional7
         orden:
             type: integer
             unsigned: false

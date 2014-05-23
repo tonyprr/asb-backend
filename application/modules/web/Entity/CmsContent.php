@@ -646,4 +646,96 @@ class CmsContent
     {
         return $this->adicional4;
     }
+
+
+    /**
+     * @var string $adicional5
+     *
+     * @ORM\Column(name="__adicional5", type="string", length=130, nullable=true)
+     */
+    private $adicional5;
+
+    /**
+     * @var string $adicional6
+     *
+     * @ORM\Column(name="__adicional6", type="string", length=130, nullable=true)
+     */
+    private $adicional6;
+
+    /**
+     * @var string $adicional7
+     *
+     * @ORM\Column(name="__adicional7", type="string", length=130, nullable=true)
+     */
+    private $adicional7;
+
+    /**
+     * Set adicional5
+     *
+     * @param string $adicional5
+     * @return CmsContent
+     */
+    public function setAdicional5($adicional5)
+    {
+        $this->adicional5 = $adicional5;
+    
+        return $this;
+    }
+
+    /**
+     * Get adicional5
+     *
+     * @return string 
+     */
+    public function getAdicional5()
+    {
+        return $this->adicional5;
+    }
+
+    /**
+     * Set adicional6
+     *
+     * @param string $adicional6
+     * @return CmsContent
+     */
+    public function setAdicional6($adicional6)
+    {
+        $this->adicional6 = $adicional6;
+    
+        return $this;
+    }
+
+    /**
+     * Get adicional6
+     *
+     * @return string 
+     */
+    public function getAdicional6()
+    {
+        return $this->adicional6;
+    }
+
+    /**
+     * Set adicional7
+     *
+     * @param string $adicional7
+     * @return CmsContent
+     */
+    public function setAdicional7($adicional7)
+    {
+        $this->adicional7 = $adicional7;
+    
+        return $this;
+    }
+
+    /**
+     * Get adicional7
+     *
+     * @return string 
+     */
+    public function getAdicional7()
+    {
+        return $this->adicional7;
+    }
+
 }

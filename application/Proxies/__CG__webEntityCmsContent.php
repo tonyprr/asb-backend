@@ -297,10 +297,46 @@ class CmsContent extends \web\Entity\CmsContent implements \Doctrine\ORM\Proxy\P
         return parent::getAdicional4();
     }
 
+    public function setAdicional5($adicional5)
+    {
+        $this->__load();
+        return parent::setAdicional5($adicional5);
+    }
+
+    public function getAdicional5()
+    {
+        $this->__load();
+        return parent::getAdicional5();
+    }
+
+    public function setAdicional6($adicional6)
+    {
+        $this->__load();
+        return parent::setAdicional6($adicional6);
+    }
+
+    public function getAdicional6()
+    {
+        $this->__load();
+        return parent::getAdicional6();
+    }
+
+    public function setAdicional7($adicional7)
+    {
+        $this->__load();
+        return parent::setAdicional7($adicional7);
+    }
+
+    public function getAdicional7()
+    {
+        $this->__load();
+        return parent::getAdicional7();
+    }
+
 
     public function __sleep()
     {
-        return array('__isInitialized__', 'idcontent', 'imagen', 'imagen2', 'adjunto', 'url', 'adicional1', 'adicional2', 'adicional3', 'adicional4', 'orden', 'estado', 'fechainipub', 'fechafinpub', 'fechamodf', 'fechareg', 'languages', 'galeria', 'comentarios', 'contcate', 'tipo');
+        return array('__isInitialized__', 'idcontent', 'imagen', 'imagen2', 'adjunto', 'url', 'adicional1', 'adicional2', 'adicional3', 'adicional4', 'adicional5', 'adicional6', 'adicional7', 'orden', 'estado', 'fechainipub', 'fechafinpub', 'fechamodf', 'fechareg', 'languages', 'galeria', 'comentarios', 'contcate', 'tipo');
     }
 
     public function __clone()

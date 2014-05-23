@@ -96,6 +96,9 @@ class Content {
             if( isset($formData['adicional2']) ) $oContent->setAdicional2($formData['adicional2']);
             if( isset($formData['adicional3']) ) $oContent->setAdicional3($formData['adicional3']);
             if( isset($formData['adicional4']) ) $oContent->setAdicional4($formData['adicional4']);
+            if( isset($formData['adicional5']) ) $oContent->setAdicional5($formData['adicional5']);
+            if( isset($formData['adicional6']) ) $oContent->setAdicional6($formData['adicional6']);
+            if( isset($formData['adicional7']) ) $oContent->setAdicional7($formData['adicional7']);
             if( isset($formData['fechainipub']) )  $oContent->setFechainipub( new \DateTime($formData['fechainipub']) );
             if( isset($formData['fechafinpub']) )  $oContent->setFechafinpub( new \DateTime($formData['fechafinpub']) );
                 

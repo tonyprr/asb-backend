@@ -76,9 +76,15 @@ Ext.define('Tonyprr.mvc.view.web.WinContenido1', {
                                         ]
                                     },            
                                     {
-                                        fieldLabel:'Distrito',
+                                        fieldLabel:'Video YouTube',
                                         anchor : '90%',
                                         name:'url',
+                                        vtype: 'url' 
+                                    },
+                                    {
+                                        fieldLabel:'Distrito',
+                                        anchor : '90%',
+                                        name:'adicional5',
                                         allowBlank:false 
                                     },
                                     {
@@ -118,6 +124,26 @@ Ext.define('Tonyprr.mvc.view.web.WinContenido1', {
                                             {
                                                 xtype:'filefield',
                                                 name:'file_image',
+                                                msgTarget: 'side',
+//                                                anchor : '30%',
+                                                buttonConfig :{iconCls:'image_edit'},buttonText:''
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        xtype: 'fieldcontainer',
+                                        fieldLabel: 'Mapa Ubicación',
+                                        layout: 'hbox',
+                                        items: [
+                                            {
+                                                xtype :'textfield',
+                                                name :'imagen2',
+                                                width: 300, disabled : true
+                                            },
+                                            {xtype: 'splitter'},
+                                            {
+                                                xtype:'filefield',
+                                                name:'file_image2',
                                                 msgTarget: 'side',
 //                                                anchor : '30%',
                                                 buttonConfig :{iconCls:'image_edit'},buttonText:''
@@ -166,7 +192,7 @@ Ext.define('Tonyprr.mvc.view.web.WinContenido1', {
                                         name: 'adicional2',
 //                                        fieldLabel: '',
                                         labelAlign: 'top',
-                                        height: 200,
+                                        height: 390,
                                         anchor: '100%',
                                         tinymceConfig: {
                                             theme_advanced_buttons1: 'fullscreen,|,undo,redo,|,bold,italic,underline,strikethrough,|,forecolor,backcolor,removeformat,|,justifyleft,justifycenter,justifyright,justifyfull,|,fontselect,|,code',
@@ -191,7 +217,7 @@ Ext.define('Tonyprr.mvc.view.web.WinContenido1', {
                                         name: 'adicional3',
 //                                        fieldLabel: '',
                                         labelAlign: 'top',
-                                        height: 200,
+                                        height: 390,
                                         anchor: '100%',
                                         tinymceConfig: {
                                             theme_advanced_buttons1: 'fullscreen,|,undo,redo,|,bold,italic,underline,strikethrough,|,forecolor,backcolor,removeformat,|,justifyleft,justifycenter,justifyright,justifyfull,|,fontselect,|,code',
@@ -216,7 +242,7 @@ Ext.define('Tonyprr.mvc.view.web.WinContenido1', {
                                         name: 'adicional4',
 //                                        fieldLabel: 'Acabados',
                                         labelAlign: 'top',
-                                        height: 200,
+                                        height: 390,
                                         anchor: '100%',
                                         tinymceConfig: {
                                             theme_advanced_buttons1: 'fullscreen,|,undo,redo,|,bold,italic,underline,strikethrough,|,forecolor,backcolor,removeformat,|,justifyleft,justifycenter,justifyright,justifyfull,|,fontselect,|,code',
