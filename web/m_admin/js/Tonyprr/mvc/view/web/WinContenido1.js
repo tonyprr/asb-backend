@@ -97,18 +97,32 @@ Ext.define('Tonyprr.mvc.view.web.WinContenido1', {
                                     },
                                     {
                                         xtype: 'hidden',
-                                        name:'idcontcate'
-                                    },
-                                    {
-                                        xtype: 'hidden',
                                         name:'idTipo'
                                     },
+/*                                    {
+                                        xtype: 'hidden',
+                                        name:'idcontcate'
+                                    },
+
                                     {
                                         fieldLabel:'Categoria',
                                         anchor : '90%',
                                         name:'nameCate',
                                         disabled : true,
                                         allowBlank:false 
+                                    },
+*/                                    {
+                                        xtype: 'combobox',
+                                        fieldLabel: 'Categoría',
+                                        anchor : '90%',
+                                        itemId: 'cboCategoriaContenido1',
+                                        name:'idcontcate',
+                                        typeAhead: true,
+                        //                readOnly : true,
+                                        store: 'Tonyprr.mvc.store.web.ContentCategoria',
+                                        queryMode: 'local',
+                                        displayField: 'nameCate',
+                                        valueField: 'idcontcate'
                                     },
                                     {
                                         xtype: 'fieldcontainer',
@@ -152,7 +166,7 @@ Ext.define('Tonyprr.mvc.view.web.WinContenido1', {
                                     },
                                     {
                                         xtype: 'fieldcontainer',
-                                        fieldLabel: 'Adjunto',
+                                        fieldLabel: 'Foto Grande',
                                         layout: 'hbox',
                                         items: [
                                             {
@@ -165,7 +179,7 @@ Ext.define('Tonyprr.mvc.view.web.WinContenido1', {
                                                 xtype:'filefield',
                                                 name:'file_adjunto',
                                                 msgTarget: 'side',
-                                                buttonConfig :{iconCls:'file_pdf'},buttonText:''
+                                                buttonConfig :{iconCls:'image_edit'},buttonText:''
                                             }
 //                                            {xtype: 'splitter', width:15},
 //                                            {

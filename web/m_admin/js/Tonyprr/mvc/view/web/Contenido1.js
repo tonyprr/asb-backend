@@ -92,6 +92,7 @@ Ext.define("Tonyprr.mvc.view.web.Contenido1", {
             columnLines : true,
             autoScroll:true,
             store: storeContenido1,
+            height: 350,
             border:false,
             dockedItems : [{
                 xtype: 'toolbar',

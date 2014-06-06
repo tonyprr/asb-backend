@@ -132,12 +132,18 @@ class CmsContentRepository extends EntityRepository
     public function getById($id, $language=null, $asArray=true, $soloActivo=false) {
         $oContentLang = null;
         try {
-            $dqlList = 'SELECT c FROM \web\Entity\CmsContent c WHERE c.idcontent = ?1';
-            $qyContent = $this->_em->createQuery($dqlList);
-            $qyContent->setParameter(1,$id);
-            if($soloActivo) {
-                $dqlList .= ' AND  c.estado = 1';
-            }
+
+            $qbContent = $this->_em->createQueryBuilder();
+            $qbContent->select( array("c", "cat"))->from($this->_entityName, 'c')
+                        ->innerJoin('c.contcate','cat')
+                        ->where("c.idcontent = ?1")
+                        ->setParameter(1, $id);
+
+
+            if ($soloActivo) 
+                $qbContent->andWhere('c.estado = 1');
+            $qyContent = $qbContent->getQuery();
+
             if ($asArray) {
                 $oContent = $qyContent->getArrayResult();
                 $objRecords = \Tonyprr_lib_Records::getInstance();

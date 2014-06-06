@@ -3,7 +3,7 @@ Ext.define('Tonyprr.mvc.controller.web.Contenido1', {
     stores	: [
                     'Tonyprr.abstract.Store','Tonyprr.mvc.store.web.Content','Tonyprr.mvc.store.web.ContentLanguage'
                     ,'Tonyprr.mvc.store.web.ContentCategoriaTree','Tonyprr.mvc.store.web.ContentGaleriaLanguage',
-                    'Tonyprr.mvc.store.web.ContentGaleria'
+                    'Tonyprr.mvc.store.web.ContentGaleria','Tonyprr.mvc.store.web.ContentCategoria'
                   ],
     models	: [
                     'Tonyprr.abstract.Model','Tonyprr.mvc.model.web.Content','Tonyprr.mvc.model.web.ContentLanguage'
@@ -32,6 +32,10 @@ Ext.define('Tonyprr.mvc.controller.web.Contenido1', {
         ,{
             ref: 'winContenido1',
             selector: 'panel[itemId="winContenido1"]'
+        }
+        ,{
+            ref: 'cboCategoriaContenido1',
+            selector: 'panel[itemId="winContenido1"] combobox[itemId="cboCategoriaContenido1"]'
         }
     ],
     init	: function(app) {
@@ -76,7 +80,9 @@ Ext.define('Tonyprr.mvc.controller.web.Contenido1', {
 //        if( Ext.isObject(this.getCbotipoprod()) ) this.getCbotipoprod().getStore().load();
     }
     ,onWinAfterRender: function(panel, opts) {
-//        this.getCbomarcaprod().getStore().load();
+        storeCatgoria = this.getCboCategoriaContenido1().getStore();
+        Ext.apply(storeCatgoria.getProxy().extraParams, {padre : 5});
+        storeCatgoria.load();
     }
 
     ,onSelectCategoria: function(tree, model, index) {
