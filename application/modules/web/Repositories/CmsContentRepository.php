@@ -40,6 +40,7 @@ class CmsContentRepository extends EntityRepository
                    ->leftJoin('c.contcate','ca')->leftJoin('c.languages','cl')->leftJoin('c.tipo','t')
                    ->leftJoin('ca.languages','cal')
                     ->where("cl.language = :lang and cal.language= :lang")->setParameter('lang', $oLanguage)
+                    ->addOrderBy('ca.ordenCate','ASC')
                    ->addOrderBy('c.fechainipub','DESC')->addOrderBy('c.orden','ASC');
         if ($idcontCate != NULL) $qbContent->andWhere('c.contcate = :categoria')->setParameter('categoria', $oContentCategoria);
         if ($estado != "TODOS") 
@@ -93,6 +94,7 @@ class CmsContentRepository extends EntityRepository
                     )->from($this->_entityName,'c')
                    ->leftJoin('c.contcate','ca')->leftJoin('c.languages','cl')->leftJoin('ca.languages','cal')
                     ->where("cl.language = :lang and cal.language= :lang")->setParameter('lang', $oLanguage)
+                    ->addOrderBy('ca.ordenCate','ASC')
                    ->addOrderBy('c.fechainipub','DESC')->addOrderBy('c.orden','ASC');
         if ($idtipo != NULL) $qbContent->andWhere('c.tipo = :tipo')->setParameter('tipo', $oContentTipo);
         if ($estado != "TODOS")

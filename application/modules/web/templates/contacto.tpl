@@ -31,7 +31,7 @@ a:link {
 </head>
 
 <body>
-<table style="border:2px solid #EDEDED;" width="500" align="center">
+<table style="border:2px solid #EDEDED;" width="640" align="center">
   <tr>
       <td height="55"><b>CONTÁCTENOS</b></td>
   </tr>
@@ -40,9 +40,6 @@ a:link {
                 <table cellpadding="5px" cellspacing="5px" width="100%" border="0">
                   <tr>
                       <td>Nombre</td> <td>{tpl_nombre}</td>
-                  </tr>
-                  <tr>
-                      <td>Apellidos</td> <td>{tpl_apellidos}</td>
                   </tr>
                   <tr>
                       <td>Teléfono</td> <td>{tpl_telefono}</td>

@@ -29,6 +29,7 @@ class Tonyprr_Plugin_Acl extends Zend_Acl
 		$this->add(new Zend_Acl_Resource('api'));
 		$this->addResource('api_categoria-contenido');
 		$this->addResource('api_contenido');
+		$this->addResource('api_contacto');
                 
 		// Asignar permisos
 		// guest
@@ -38,6 +39,7 @@ class Tonyprr_Plugin_Acl extends Zend_Acl
 		$this->allow('invitado', array('api') );
 		$this->allow('invitado', array('api_categoria-contenido') );
 		$this->allow('invitado', array('api_contenido') );
+		$this->allow('invitado', array('api_contacto') );
 		
                 // user
 		$this->allow('user', array('web') );
