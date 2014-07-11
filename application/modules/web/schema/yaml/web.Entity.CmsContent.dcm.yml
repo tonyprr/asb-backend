@@ -71,6 +71,16 @@ web\Entity\CmsContent:
             fixed: false
             nullable: true
             column: __adicional7
+        adicional8:
+            type: text
+            nullable: true
+            column: __adicional8
+        adicional9:
+            type: string
+            length: 150
+            fixed: false
+            nullable: true
+            column: __adicional9
         orden:
             type: integer
             unsigned: false

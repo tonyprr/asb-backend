@@ -117,10 +117,22 @@ class CmsContentGaleria extends \web\Entity\CmsContentGaleria implements \Doctri
         return parent::getContent();
     }
 
+    public function setTipoGale($tipoGale)
+    {
+        $this->__load();
+        return parent::setTipoGale($tipoGale);
+    }
+
+    public function getTipoGale()
+    {
+        $this->__load();
+        return parent::getTipoGale();
+    }
+
 
     public function __sleep()
     {
-        return array('__isInitialized__', 'idcontgale', 'ordenGale', 'imagenGale', 'fecharegGale', 'languages', 'content');
+        return array('__isInitialized__', 'idcontgale', 'ordenGale', 'tipoGale', 'imagenGale', 'fecharegGale', 'languages', 'content');
     }
 
     public function __clone()

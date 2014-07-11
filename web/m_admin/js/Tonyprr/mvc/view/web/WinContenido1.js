@@ -270,6 +270,31 @@ Ext.define('Tonyprr.mvc.view.web.WinContenido1', {
                             }
                             ,{
                                 xtype :'panel',
+                                title: 'Proy. Terminados',
+                                layout : 'anchor',
+                                padding : '2 2 2 2', 
+                                defaults: {anchor : '98%'},
+                                defaultType : 'textfield',
+                                items:[
+                                    {
+                                        xtype: 'tinymcefield',
+                                        name: 'adicional8',
+//                                        fieldLabel: '',
+                                        labelAlign: 'top',
+                                        height: 390,
+                                        anchor: '100%',
+                                        tinymceConfig: {
+                                            theme_advanced_buttons1: 'fullscreen,|,undo,redo,|,bold,italic,underline,strikethrough,|,forecolor,backcolor,removeformat,|,justifyleft,justifycenter,justifyright,justifyfull,|,fontselect,|,code',
+                                            theme_advanced_buttons2: 'fontsizeselect,|,cut,copy,paste,pastetext,pasteword,|,bullist,numlist,|,outdent,indent,|,undo,redo,|,link,unlink',
+                                            theme_advanced_buttons3: '',
+                                            theme_advanced_buttons4: '',
+                                            skin_variant : 'gray'
+                                        }
+                                    }
+                                ]
+                            }
+                            ,{
+                                xtype :'panel',
                                 title: 'Galeria del Imagenes',
                                 itemId:'panelGaleWidget',
                                 layout : 'anchor',

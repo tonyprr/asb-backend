@@ -31,6 +31,7 @@ class CmsContentRepository extends EntityRepository
                     '
                     c.idcontent,c.imagen,c.imagen2,c.adjunto,c.orden,c.estado,c.fechainipub,c.url
                     ,c.adicional1,c.adicional2,c.adicional3,c.adicional4,c.adicional5,c.adicional6,c.adicional7,
+                    c.adicional8,c.adicional9,
                     c.fechafinpub,c.fechamodf,c.fechareg,
                     cl.descripcion as nombre_content,cl.intro as intro_content,cl.detalle as detalle_content,
                     ca.idcontcate, cal.descripcion as nameCate,
@@ -87,6 +88,7 @@ class CmsContentRepository extends EntityRepository
                     '
                     c.idcontent,c.imagen,c.imagen2,c.adjunto,c.orden,c.estado,c.fechainipub,c.url
                     ,c.adicional1,c.adicional2,c.adicional3,c.adicional4,c.adicional5,c.adicional6,c.adicional7,
+                    c.adicional8,c.adicional9,
                     c.fechafinpub,c.fechamodf,c.fechareg,
                     cl.descripcion as nombre_content,cl.intro as intro_content,cl.detalle as detalle_content,
                     ca.idcontcate, cal.descripcion as nameCate

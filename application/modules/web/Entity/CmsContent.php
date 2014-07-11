@@ -738,4 +738,64 @@ class CmsContent
         return $this->adicional7;
     }
 
+    /**
+     * @var string $adicional8
+     *
+     * @ORM\Column(name="__adicional8", type="text", nullable=true)
+     */
+    private $adicional8;
+
+    /**
+     * @var string $adicional9
+     *
+     * @ORM\Column(name="__adicional9", type="string", length=150, nullable=true)
+     */
+    private $adicional9;
+
+
+    /**
+     * Set adicional8
+     *
+     * @param string $adicional8
+     * @return CmsContent
+     */
+    public function setAdicional8($adicional8)
+    {
+        $this->adicional8 = $adicional8;
+    
+        return $this;
+    }
+
+    /**
+     * Get adicional8
+     *
+     * @return string 
+     */
+    public function getAdicional8()
+    {
+        return $this->adicional8;
+    }
+
+    /**
+     * Set adicional9
+     *
+     * @param string $adicional9
+     * @return CmsContent
+     */
+    public function setAdicional9($adicional9)
+    {
+        $this->adicional9 = $adicional9;
+    
+        return $this;
+    }
+
+    /**
+     * Get adicional9
+     *
+     * @return string 
+     */
+    public function getAdicional9()
+    {
+        return $this->adicional9;
+    }
 }

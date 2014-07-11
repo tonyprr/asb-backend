@@ -333,10 +333,34 @@ class CmsContent extends \web\Entity\CmsContent implements \Doctrine\ORM\Proxy\P
         return parent::getAdicional7();
     }
 
+    public function setAdicional8($adicional8)
+    {
+        $this->__load();
+        return parent::setAdicional8($adicional8);
+    }
+
+    public function getAdicional8()
+    {
+        $this->__load();
+        return parent::getAdicional8();
+    }
+
+    public function setAdicional9($adicional9)
+    {
+        $this->__load();
+        return parent::setAdicional9($adicional9);
+    }
+
+    public function getAdicional9()
+    {
+        $this->__load();
+        return parent::getAdicional9();
+    }
+
 
     public function __sleep()
     {
-        return array('__isInitialized__', 'idcontent', 'imagen', 'imagen2', 'adjunto', 'url', 'adicional1', 'adicional2', 'adicional3', 'adicional4', 'adicional5', 'adicional6', 'adicional7', 'orden', 'estado', 'fechainipub', 'fechafinpub', 'fechamodf', 'fechareg', 'languages', 'galeria', 'comentarios', 'contcate', 'tipo');
+        return array('__isInitialized__', 'idcontent', 'imagen', 'imagen2', 'adjunto', 'url', 'adicional1', 'adicional2', 'adicional3', 'adicional4', 'adicional5', 'adicional6', 'adicional7', 'adicional8', 'adicional9', 'orden', 'estado', 'fechainipub', 'fechafinpub', 'fechamodf', 'fechareg', 'languages', 'galeria', 'comentarios', 'contcate', 'tipo');
     }
 
     public function __clone()
